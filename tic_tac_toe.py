@@ -33,10 +33,10 @@ for i in range(10):
     else:
         str_ = input("Ход противника 2 (o): ")
         field[int(str_[0])][int(str_[1])] = 'o'
-        str_ = 'Противник 2 (0)!'
+        str_ = 'Противник 2 (o)!'
 
     print_res(field)
-    if check_step(field, str):
+    if check_step(field, str_):
         break
 
     #чередуем ходы противников
