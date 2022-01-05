@@ -9,6 +9,7 @@ def check_step(result, op):
 #проверка хода на выигрыш
     for i in range(3):
         if result[i][0] == result[i][1] == result[i][2] != '-' or \
+                result[0][i] == result[1][i] == result[2][i] != '-' or \
                 result[0][0] == result[1][1] == result[2][2] != '-' or \
                 result[0][2] == result[1][1] == result[2][0] != '-':
             print("Выиграл ", op)
