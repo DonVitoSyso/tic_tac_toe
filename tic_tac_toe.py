@@ -19,16 +19,14 @@ def input_step(fld, str_, value):
 
     #запись хода в таблицу
     while True:
-        if 0 <= int(str_[0]) <= 2 or 0 <= int(str_[1]) <= 2 \
+        if 0 <= int(str_[0]) <= 2 and 0 <= int(str_[1]) <= 2 \
                 and fld[int(str_[0])][int(str_[1])] == '-':
             fld[int(str_[0])][int(str_[1])] = value
             return fld[int(str_[0])][int(str_[1])]
+        else:
+            str_ = input(f'Не верная координата. Повторите ход: ')
 
 
-
-
-opponent = True
-x, y = 0, 0
 str_ = ''
 field = [
     ['-', '-', '-'],
@@ -36,20 +34,18 @@ field = [
     ['-', '-', '-'],
 ]
 
-while True:
+for i in range(9):
     print_res(field)
-    if opponent:
+    if i%2:
+        str_ = input("Ход противника 2 (o): ")
+        input_step(field, str_, 'o')
+        str_ = 'Противник 2 (o)!'
+    else:
         str_ = input("Ход противника 1 (х): ")
         input_step(field, str_, 'x')
-        #field[int(str_[0])][int(str_[1])] = 'x'
         str_ = 'Противник 1 (х)!'
-    else:
-        str_ = input("Ход противника 2 (o): ")
-        field[int(str_[0])][int(str_[1])] = 'o'
-        str_ = 'Противник 2 (o)!'
 
     if check_step(field, str_):
         break
 
-    #чередуем ходы противников
-    opponent = False if opponent else True
+print("Игра окончена!")
