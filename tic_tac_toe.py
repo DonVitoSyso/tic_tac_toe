@@ -1,9 +1,8 @@
 def print_res(result):
 #выводим результат в консоль
     print("   0 1 2")
-    print("0 ", *result[0])
-    print("1 ", *result[1])
-    print("2 ", *result[2])
+    for i in range(3):
+        print(f"{i} ", *result[i])
 
 def check_step(result, op):
 #проверка хода на выигрыш
@@ -16,6 +15,17 @@ def check_step(result, op):
             return True
     return False
 
+def input_step(fld, str_, value):
+
+    #запись хода в таблицу
+    while True:
+        if 0 <= int(str_[0]) <= 2 or 0 <= int(str_[1]) <= 2 \
+                and fld[int(str_[0])][int(str_[1])] == '-':
+            fld[int(str_[0])][int(str_[1])] = value
+            return fld[int(str_[0])][int(str_[1])]
+
+
+
 
 opponent = True
 x, y = 0, 0
@@ -26,17 +36,18 @@ field = [
     ['-', '-', '-'],
 ]
 
-for i in range(10):
+while True:
+    print_res(field)
     if opponent:
         str_ = input("Ход противника 1 (х): ")
-        field[int(str_[0])][int(str_[1])] = 'x'
+        input_step(field, str_, 'x')
+        #field[int(str_[0])][int(str_[1])] = 'x'
         str_ = 'Противник 1 (х)!'
     else:
         str_ = input("Ход противника 2 (o): ")
         field[int(str_[0])][int(str_[1])] = 'o'
         str_ = 'Противник 2 (o)!'
 
-    print_res(field)
     if check_step(field, str_):
         break
 
